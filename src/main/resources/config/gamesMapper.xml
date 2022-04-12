@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gameDAO">
+
+	<insert id="insert" parameterType="GamesDTO">
+		INSERT INTO
+		GAMES(G_NUM,G_CODE, G_NAME, G_DEV, G_DATE, G_PRICE, G_CONTENT,AD_NUM)
+		VALUES(GAMES_SEQ.nextval, #{gCode}, #{gName}, #{gDev}, #{gDate},
+		#{gPrice},#{gContent},
+		(select AD_NUM from ADMIN WHERE AUTH_NUM=(select
+		AUTH_NUM FROM AUTH WHERE AUTH_LEVEL=3)))
+	</insert>
+
+	<insert id="insertMainFile" parameterType="GameFilesDTO">
+		INSERT INTO
+		GAME_FILES(GF_NUM, GF_FILENAME, GF_SAVEDFILENAME,
+		GF_LOCATION,G_NUM,GF_CODE)
+		VALUES (GF_SEQ.nextval, #{gfFilename},
+		#{gfSavedfilename}, #{gfLocation},(select G_NUM from GAMES WHERE
+		G_NAME=#{gName}),#{gfCode})
+	</insert>
+
+	<insert id="insertGr" parameterType="GenreDTO">
+		INSERT INTO
+		GAME_GENRE(G_NUM,GEN_KEY)
+		VALUES((select G_NUM from GAMES WHERE
+		G_NAME=#{gName}),#{genKey})
+	</insert>
+
+	<insert id="insertSpec" parameterType="SpecDTO">
+		INSERT INTO
+		SPEC(
+			SPEC_NUM,
+			SPEC_MIN_CPU,
+			SPEC_MIN_RAM,
+			SPEC_MIN_GPU,
+			SPEC_MIN_DX,
+			SPEC_PRO_CPU,
+			SPEC_PRO_RAM,
+			SPEC_PRO_GPU,
+			SPEC_PRO_DX,
+			G_NUM)
+		VALUES(SPEC_SEQ.nextval,#{specMinCpu},#{specMinRam},#{specMinGpu},#{specMinDx},#{specProCpu},#{specProRam},#{specProGpu},#{specProDx},(select G_NUM from GAMES WHERE G_NAME=#{gName}))
+	</insert>
+
+	<insert id="insertSlideFile" parameterType="GameFilesDTO">
+		INSERT INTO
+		GAME_FILES(GF_NUM, GF_FILENAME, GF_SAVEDFILENAME,
+		GF_LOCATION,G_NUM,GF_CODE)
+		VALUES (GF_SEQ.nextval, #{gfFilename},
+		#{gfSavedfilename}, #{gfLocation},(select G_NUM from GAMES WHERE
+		G_NAME=#{gName}),#{gfCode})
+	</insert>
+
+
+	<select id="selectGenre" resultType="hashMap"
+		parameterType="hashMap">
+		select * from GENRES
+	</select>
+
+	<select id="selectList" resultType="hashMap" parameterType="hashMap">
+		select 
+	</select>
+
+
+
+</mapper>

@@ -12,17 +12,8 @@ public class GameRegCommand {
 	private String gDate;
 	private Long gPrice;
 	private String gContent;
-	private ArrayList<String> genKey;
+	private ArrayList<String> genNum;
 	private MultipartFile imgFile;
-	
-	public ArrayList<String> getGenKey() {
-		return genKey;
-	}
-
-	public void setGenKey(ArrayList<String> genKey) {
-		this.genKey = genKey;
-	}
-
 
 	public String getgCode() {
 		return gCode;
@@ -72,6 +63,14 @@ public class GameRegCommand {
 		this.gContent = gContent;
 	}
 
+	public ArrayList<String> getGenNum() {
+		return genNum;
+	}
+
+	public void setGenNum(ArrayList<String> genNum) {
+		this.genNum = genNum;
+	}
+
 	public MultipartFile getImgFile() {
 		return imgFile;
 	}
@@ -80,5 +79,10 @@ public class GameRegCommand {
 		this.imgFile = imgFile;
 	}
 
+	@Override
+	public String toString() {
+		return "GameRegCommand [gCode=" + gCode + ", gName=" + gName + ", gDev=" + gDev + ", gDate=" + gDate
+				+ ", gPrice=" + gPrice + ", gContent=" + gContent + ", genNum=" + genNum + ", imgFile=" + imgFile + "]";
+	}
 
 }

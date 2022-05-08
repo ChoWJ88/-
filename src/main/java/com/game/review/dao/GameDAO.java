@@ -6,6 +6,7 @@ import java.util.Map;
 import com.game.review.dto.GameFilesDTO;
 import com.game.review.dto.GamesDTO;
 import com.game.review.dto.GenreDTO;
+import com.game.review.dto.MyGenreDTO;
 import com.game.review.dto.SpecDTO;
 
 public interface GameDAO {
@@ -19,8 +20,14 @@ public interface GameDAO {
 
 	public void insertSlideFile(GameFilesDTO gamefilesDTO);
 
+	public void deleteGame(GamesDTO gamesDTO);
+
 	public List<Map<String, Object>> selectGenre();
 
-	public List<Map<String, Object>> selectList();
+	public List<MyGenreDTO> selectGenreList();
+
+	public List<GameFilesDTO> selectGameFilesList();
+
+	public List<GamesDTO> selectGameList();
 
 }

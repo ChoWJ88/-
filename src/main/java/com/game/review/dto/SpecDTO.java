@@ -14,6 +14,15 @@ public class SpecDTO {
 	private String specProGpu;
 	private String specProDx;
 	private String gName;
+	private Long gNum;
+
+	public Long getgNum() {
+		return gNum;
+	}
+
+	public void setgNum(Long gNum) {
+		this.gNum = gNum;
+	}
 
 	public String getgName() {
 		return gName;

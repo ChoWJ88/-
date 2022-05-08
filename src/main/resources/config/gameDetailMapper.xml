@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gameDetailDAO">
+
+	<select id="detailGenreList" resultType="myGenreDTO" >
+		select G_NUM, (select
+		GEN_NAME from GENRES where GEN_NUM=GENRE_GAMES.GEN_NUM) as GEN_NAME
+		from GENRE_GAMES where G_NUM= #{gNum}
+	</select>
+
+	<select id="detailGameFilesList" resultType="gameFilesDTO">
+		select * from
+		"GAME_FILES"  WHERE G_NUM = #{gNum}
+	</select>
+
+	<select id="detailGameList" resultType="gamesDTO">
+		select * from GAMES WHERE G_NUM = #{gNum}
+	</select>
+
+	<select id="detailSpecList" resultType="SpecDTO">
+		select * from
+		SPEC WHERE G_NUM = #{gNum}
+	</select>
+	
+</mapper>

@@ -21,41 +21,42 @@
 			<tr>
 
 				<td><font color="blue">최소CPU</font></td>
-				<td><form:input path="specMinCpu" />
+				<td><form:input path="specMinCpu" /></td>
 			</tr>
 			<tr>
 				<td><font color="blue">최소메모리</font></td>
-				<td><form:input path="specMinRam" />
+				<td><form:input path="specMinRam" /></td>
 			</tr>
 			<tr>
 				<td><font color="blue">최소그래픽</font></td>
-				<td><form:input path="specMinGpu" />
+				<td><form:input path="specMinGpu" /></td>
 			</tr>
 			<tr>
 				<td><font color="blue">최소DIRECTX</font></td>
-				<td><form:input path="specMinDx" />
+				<td><form:input path="specMinDx" /></td>
 			</tr>
 			<tr>
 				<td><font color="blue">권장CPU</font></td>
-				<td><form:input path="specProCpu" />
+				<td><form:input path="specProCpu" /></td>
 			</tr>
 			<tr>
 				<td><font color="blue">권장메모리</font></td>
-				<td><form:input path="specProRam" />
+				<td><form:input path="specProRam" /></td>
 			</tr>
 			<tr>
 				<td><font color="blue">권장그래픽</font></td>
-				<td><form:input path="specProGpu" />
+				<td><form:input path="specProGpu" /></td>
 			</tr>
 			<tr>
 				<td><font color="blue">권장DIRECTX</font></td>
-				<td><form:input path="specProDx" />
+				<td><form:input path="specProDx" /></td>
 			</tr>
 			<tr>
 				<td><font color="blue">슬라이드</font></td>
-				<td><input type="file" name="slideImgFile" placeholder="파일 선택" multiple />
+				<td><input type="file" name="slideImgFile" placeholder="파일 선택"
+					multiple /><form:errors path="slideImgFile" /></td>
 			</tr>
-			
+
 
 		</table>
 
@@ -67,17 +68,6 @@
 
 
 
-<!-- 	<h1>Multi File Upload (다중 파일 업로드)</h1> -->
-
-<%-- 	<form action="multi_fileUpload" method="post" --%>
-<%-- 		enctype="multipart/form-data"> --%>
-
-<!-- 		<!-- multiple 속성추가 --> 
-
-<!-- 		<input type="file" name="uploadfiles" placeholder="파일 선택" multiple /> -->
-<!-- 		<br /> <input type="submit" value="upload"> -->
-
-<%-- 	</form> --%>
 
 </body>
 </html>

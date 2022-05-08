@@ -8,9 +8,17 @@ public class GameFilesDTO {
 	private Long gfNum;
 	private String gfFilename;
 	private String gfSavedfilename;
-	private String gfLocation;
 	private String gName;
 	private String gfCode;
+	private String gNum;
+
+	public String getgNum() {
+		return gNum;
+	}
+
+	public void setgNum(String gNum) {
+		this.gNum = gNum;
+	}
 
 	public String getGfCode() {
 		return gfCode;
@@ -44,13 +52,6 @@ public class GameFilesDTO {
 		this.gfSavedfilename = gfSavedfilename;
 	}
 
-	public String getGfLocation() {
-		return gfLocation;
-	}
-
-	public void setGfLocation(String gfLocation) {
-		this.gfLocation = gfLocation;
-	}
 
 	public String getgName() {
 		return gName;
@@ -59,5 +60,12 @@ public class GameFilesDTO {
 	public void setgName(String gName) {
 		this.gName = gName;
 	}
+
+	@Override
+	public String toString() {
+		return "GameFilesDTO [gfNum=" + gfNum + ", gfFilename=" + gfFilename + ", gfSavedfilename=" + gfSavedfilename
+				+ ", gfLocation=" +  ", gName=" + gName + ", gfCode=" + gfCode + ", gNum=" + gNum + "]";
+	}
+	
 
 }

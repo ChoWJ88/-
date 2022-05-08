@@ -17,13 +17,6 @@ public class GameSpecCommand {
 	private String specProDx;
 	private String gName;
 
-	@Override
-	public String toString() {
-		return "GameSpecCommand [slideImgFile=" + slideImgFile + ", specMinCpu=" + specMinCpu + ", specMinRam="
-				+ specMinRam + ", specMinGpu=" + specMinGpu + ", specMinDx=" + specMinDx + ", specProCpu=" + specProCpu
-				+ ", specProRam=" + specProRam + ", specProGpu=" + specProGpu + ", specProDx=" + specProDx + ", gName="
-				+ gName + "]";
-	}
 
 	public String getgName() {
 		return gName;

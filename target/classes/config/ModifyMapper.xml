@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gameModifyDAO">
+
+	<update id="updateGame" parameterType="GamesDTO">
+		update "GAMES"
+		set
+		"G_NAME"=#{gName}, "G_CODE"=#{gCode},
+		"G_DEV"=#{gDev},
+		"G_DATE"=#{gDate}, "G_PRICE"=${gPrice},
+		"G_CONTENT"=#{gContent} where
+		"G_NUM"=#{gNum}
+	</update>
+
+	<update id="updateSpec" parameterType="SpecDTO">
+		update "SPEC"
+		set
+		"SPEC_MIN_CPU"=#{specMinCpu}, "SPEC_MIN_RAM"=#{specMinRam},
+		"SPEC_MIN_GPU"=#{specMinGpu},
+		"SPEC_MIN_DX"=#{specMinDx},"SPEC_PRO_CPU"=#{specProCpu},
+		"SPEC_PRO_RAM"=#{specProRam}
+		,"SPEC_PRO_GPU"=#{specProGpu}
+		,"SPEC_PRO_DX"=#{specProDx}
+		where "G_NUM"=#{gNum}
+	</update>
+
+	<delete id="deleteGenre" parameterType="Long">
+		DELETE FROM GENRE_GAMES WHERE "G_NUM"=#{gNum}
+	</delete>
+
+	<insert id="updateGenre" parameterType="GenreDTO">
+		INSERT INTO
+		GENRE_GAMES(GR_NUM,G_NUM,GEN_NUM)
+		VALUES(GENRE_GAMES_SEQ.nextval,#{gNum},#{genNum})
+	</insert>
+
+<insert id="upinsertSpec" parameterType="SpecDTO">
+		INSERT INTO
+		SPEC(
+		SPEC_NUM,
+		SPEC_MIN_CPU,
+		SPEC_MIN_RAM,
+		SPEC_MIN_GPU,
+		SPEC_MIN_DX,
+		SPEC_PRO_CPU,
+		SPEC_PRO_RAM,
+		SPEC_PRO_GPU,
+		SPEC_PRO_DX,
+		G_NUM)
+		VALUES(SPEC_SEQ.nextval,#{specMinCpu},#{specMinRam},#{specMinGpu},#{specMinDx},#{specProCpu},#{specProRam},#{specProGpu},#{specProDx},
+		#{gNum})
+	</insert>
+
+	<select id="selectGenreAll" resultType="hashMap"
+		parameterType="hashMap">
+		select * from GENRES
+	</select>
+
+	<select id="modifyGenreList" resultType="myGenreDTO">
+		select
+		G_NUM, GEN_NUM,(select
+		GEN_NAME from GENRES where GEN_NUM=GENRE_GAMES.GEN_NUM)
+		as GEN_NAME
+		from GENRE_GAMES where G_NUM= #{gNum}
+	</select>
+
+	<select id="modifyGameFilesList" resultType="gameFilesDTO">
+		select * from
+		"GAME_FILES" WHERE G_NUM = #{gNum}
+	</select>
+
+	<select id="modifyGameList" resultType="gamesDTO">
+		select * from GAMES WHERE
+		G_NUM = #{gNum}
+	</select>
+
+	<select id="modifySpecList" resultType="SpecDTO">
+		select * from
+		SPEC WHERE
+		G_NUM = #{gNum}
+	</select>
+
+</mapper>

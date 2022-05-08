@@ -15,8 +15,9 @@
 		<typeAlias type="com.game.review.dto.SpecDTO" />
 		<typeAlias type="com.game.review.dto.MemberDTO" />
 		<typeAlias type="com.game.review.dto.GenreDTO" />
-
-
+		<typeAlias type="com.game.review.dto.MyGenreDTO" />
+		
+		
 
 	</typeAliases>
 </configuration>

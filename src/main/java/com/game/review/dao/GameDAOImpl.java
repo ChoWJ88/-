@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.game.review.dto.GameFilesDTO;
 import com.game.review.dto.GamesDTO;
 import com.game.review.dto.GenreDTO;
+import com.game.review.dto.MyGenreDTO;
 import com.game.review.dto.SpecDTO;
 
 @Repository
@@ -54,9 +55,27 @@ public class GameDAOImpl implements GameDAO {
 	}
 
 	@Override
-	public List<Map<String, Object>> selectList() {
-		
-		return sqlSessionTemplate.selectList("selectList");
+	public List<MyGenreDTO> selectGenreList() {
+
+		return sqlSessionTemplate.selectList("selectGenreList");
+	}
+
+	@Override
+	public List<GameFilesDTO> selectGameFilesList() {
+
+		return sqlSessionTemplate.selectList("selectGameFilesList");
+	}
+
+	@Override
+	public List<GamesDTO> selectGameList() {
+
+		return sqlSessionTemplate.selectList("selectGameList");
+	}
+
+	@Override
+	public void deleteGame(GamesDTO gamesDTO) {
+		sqlSessionTemplate.delete("deleteGame", gamesDTO);
+
 	}
 
 }

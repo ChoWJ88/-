@@ -10,49 +10,59 @@
 		VALUES(GAMES_SEQ.nextval, #{gCode}, #{gName}, #{gDev}, #{gDate},
 		#{gPrice},#{gContent},
 		(select AD_NUM from ADMIN WHERE AUTH_NUM=(select
-		AUTH_NUM FROM AUTH WHERE AUTH_LEVEL=3)))
+		AUTH_NUM FROM AUTH WHERE AUTH_LEVEL='ROLE_ADMIN')))
 	</insert>
 
 	<insert id="insertMainFile" parameterType="GameFilesDTO">
 		INSERT INTO
 		GAME_FILES(GF_NUM, GF_FILENAME, GF_SAVEDFILENAME,
-		GF_LOCATION,G_NUM,GF_CODE)
-		VALUES (GF_SEQ.nextval, #{gfFilename},
-		#{gfSavedfilename}, #{gfLocation},(select G_NUM from GAMES WHERE
+		G_NUM,GF_CODE)
+		VALUES
+		(GF_SEQ.nextval, #{gfFilename},
+		#{gfSavedfilename},(select G_NUM from
+		GAMES WHERE
 		G_NAME=#{gName}),#{gfCode})
 	</insert>
 
 	<insert id="insertGr" parameterType="GenreDTO">
 		INSERT INTO
-		GAME_GENRE(G_NUM,GEN_KEY)
-		VALUES((select G_NUM from GAMES WHERE
-		G_NAME=#{gName}),#{genKey})
+		GENRE_GAMES(GR_NUM,G_NUM,GEN_NUM)
+		VALUES(GENRE_GAMES_SEQ.nextval,(select G_NUM from GAMES WHERE
+		G_NAME=#{gName}),#{genNum})
 	</insert>
 
 	<insert id="insertSpec" parameterType="SpecDTO">
 		INSERT INTO
 		SPEC(
-			SPEC_NUM,
-			SPEC_MIN_CPU,
-			SPEC_MIN_RAM,
-			SPEC_MIN_GPU,
-			SPEC_MIN_DX,
-			SPEC_PRO_CPU,
-			SPEC_PRO_RAM,
-			SPEC_PRO_GPU,
-			SPEC_PRO_DX,
-			G_NUM)
-		VALUES(SPEC_SEQ.nextval,#{specMinCpu},#{specMinRam},#{specMinGpu},#{specMinDx},#{specProCpu},#{specProRam},#{specProGpu},#{specProDx},(select G_NUM from GAMES WHERE G_NAME=#{gName}))
+		SPEC_NUM,
+		SPEC_MIN_CPU,
+		SPEC_MIN_RAM,
+		SPEC_MIN_GPU,
+		SPEC_MIN_DX,
+		SPEC_PRO_CPU,
+		SPEC_PRO_RAM,
+		SPEC_PRO_GPU,
+		SPEC_PRO_DX,
+		G_NUM)
+		VALUES(SPEC_SEQ.nextval,#{specMinCpu},#{specMinRam},#{specMinGpu},#{specMinDx},#{specProCpu},#{specProRam},#{specProGpu},#{specProDx},
+		(select G_NUM from GAMES WHERE G_NAME=#{gName}))
 	</insert>
 
 	<insert id="insertSlideFile" parameterType="GameFilesDTO">
 		INSERT INTO
 		GAME_FILES(GF_NUM, GF_FILENAME, GF_SAVEDFILENAME,
-		GF_LOCATION,G_NUM,GF_CODE)
-		VALUES (GF_SEQ.nextval, #{gfFilename},
-		#{gfSavedfilename}, #{gfLocation},(select G_NUM from GAMES WHERE
+		G_NUM,GF_CODE)
+		VALUES
+		(GF_SEQ.nextval, #{gfFilename},
+		#{gfSavedfilename},(select G_NUM from
+		GAMES WHERE
 		G_NAME=#{gName}),#{gfCode})
 	</insert>
+	<delete id="deleteGame" parameterType="Long">
+		DELETE FROM GAMES
+		WHERE
+		"G_NUM"=#{gNum}
+	</delete>
 
 
 	<select id="selectGenre" resultType="hashMap"
@@ -60,9 +70,23 @@
 		select * from GENRES
 	</select>
 
-	<select id="selectList" resultType="hashMap" parameterType="hashMap">
-		select 
+	<select id="selectGenreList" resultType="myGenreDTO">
+		select G_NUM, (select
+		GEN_NAME from GENRES where GEN_NUM=GENRE_GAMES.GEN_NUM) as GEN_NAME
+		from GENRE_GAMES
 	</select>
+
+	<select id="selectGameFilesList" resultType="gameFilesDTO">
+		select * from
+		"GAME_FILES"
+	</select>
+
+	<select id="selectGameList" resultType="gamesDTO">
+		select * from
+		"GAMES"
+		order by "G_NUM"
+	</select>
+
 
 
 

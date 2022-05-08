@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -62,13 +63,13 @@ public class GameRegService {
 			newGame.setgCode(grc.getgCode());
 			newGamefile.setGfFilename(orifile);
 			newGamefile.setGfSavedfilename(savedfile);
-			newGamefile.setGfLocation(path);
 			newGamefile.setgName(grc.getgName());
 			newGamefile.setGfCode("1");
 			gameDAO.insert(newGame);
 			gameDAO.insertMainFile(newGamefile);
-			for (int i = 0; i < grc.getGenKey().size(); i++) {
-				newGameGr.setGenKey(Integer.parseInt(grc.getGenKey().get(i)));
+
+			for (int i = 0; i < grc.getGenNum().size(); i++) {
+				newGameGr.setGenNum(Long.parseLong(grc.getGenNum().get(i)));
 				newGameGr.setgName(grc.getgName());
 				gameDAO.insertGr(newGameGr);
 			}
@@ -116,7 +117,6 @@ public class GameRegService {
 
 				newGamefile.setGfFilename(orifile);
 				newGamefile.setGfSavedfilename(savedfile);
-				newGamefile.setGfLocation(path);
 				newGamefile.setgName(gsc.getgName());
 				newGamefile.setGfCode("2");
 

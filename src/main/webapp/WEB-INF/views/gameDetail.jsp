@@ -9,11 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <title>게임 디테일</title>
+
 </head>
 <body>
 	<h1>${gameList.gName}</h1>
 	<table border="1">
+
 		<form:input type="hidden" value="${gameList.gNum}" path="gNum" />
+		
+
 		<tr>
 			<td colspan="3"><c:forEach var="gameFile"
 					items="${gameFilesList}">
@@ -127,6 +131,6 @@
 		onclick="location.href='<c:url value="specModify/${gameList.gNum}"/>'">
 
 	<input type="button" value="게임 삭제"
-		onclick="location.href='<c:url value="deleteGame/${gameList.gNum}"/>'">
+		onclick="location.href='<c:url value="deleteGame/${gameList.gNum}/${gameList.gName }"/>'">
 </body>
 </html>

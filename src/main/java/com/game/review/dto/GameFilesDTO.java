@@ -10,13 +10,13 @@ public class GameFilesDTO {
 	private String gfSavedfilename;
 	private String gName;
 	private String gfCode;
-	private String gNum;
+	private Long gNum;
 
-	public String getgNum() {
+	public Long getgNum() {
 		return gNum;
 	}
 
-	public void setgNum(String gNum) {
+	public void setgNum(Long gNum) {
 		this.gNum = gNum;
 	}
 

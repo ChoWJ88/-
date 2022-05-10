@@ -75,26 +75,13 @@ public class GameModifyController {
 	public String genreModify(@ModelAttribute("modifyGenre") GenreModifyCommand genreModifyCommand,
 			@PathVariable("gNum") Long gNum, Model model) {
 
-		try {
+	
 			gameModifyService.deleteGenre(genreModifyCommand);
 			gameModifyService.updateGenre(genreModifyCommand);
-		} catch (Exception e) {
-
-			return "exceptions/noCheckGenre";
-		}
+	
 
 		return "redirect:/read/{gNum}";
 
-	}
-
-	@RequestMapping(value = "/read/gameFileModify/{gNum}", method = RequestMethod.GET)
-	public String goGameFileModify(@ModelAttribute("modifyGenre") GameFileModifyCommand gameFileModifyCommand,
-			@PathVariable("gNum") Long gNum, Model model) {
-
-		model.addAttribute("gameFilesList", gameModifyService.modifyGameFilesList(gNum));
-		model.addAttribute("gameList", gameModifyService.modifyGameList(gNum));
-
-		return "gameFileModify";
 	}
 
 	@ExceptionHandler(NoCheckGenreException.class)

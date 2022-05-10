@@ -14,10 +14,10 @@ public class DeleteController {
 	@Autowired
 	DeleteService deleteService;
 
-	@RequestMapping(value = "/read/deleteGame/{gNum}", method = RequestMethod.GET)
-	public String deleteGame(@PathVariable("gNum") Long gNum) {
+	@RequestMapping(value = "/read/deleteGame/{gNum}/{gName}", method = RequestMethod.GET)
+	public String deleteGame(@PathVariable("gNum") Long gNum,@PathVariable("gName") String gName) {
 
-		deleteService.deleteGame(gNum);
+		deleteService.deleteGame(gNum, gName);
 		return "redirect:/list";
 	}
 

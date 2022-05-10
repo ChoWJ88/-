@@ -27,8 +27,52 @@
 	</update>
 
 	<delete id="deleteGenre" parameterType="Long">
-		DELETE FROM GENRE_GAMES WHERE "G_NUM"=#{gNum}
+		DELETE FROM GENRE_GAMES
+		WHERE "G_NUM"=#{gNum}
 	</delete>
+
+	<delete id="deleteMainFile" parameterType="String">
+		DELETE FROM GAME_FILES
+		WHERE GF_CODE=${gfCode} and G_NUM=${gNum}
+	</delete>
+	
+	<delete id="deleteSlideFile" parameterType="GameFilesDTO">
+		DELETE FROM GAME_FILES
+		WHERE GF_NUM=#{gfNum} and GF_CODE=${gfCode} and G_NUM=${gNum}
+	</delete>
+
+	<select id="selectsfn" resultType="GameFilesDTO">
+		select GF_SAVEDFILENAME from GAME_FILES where
+		GF_CODE=${gfCode} and
+		G_NUM=${gNum}
+	</select>
+
+
+	<select id="selectGfSavedName" parameterType="Long" resultType="GameFilesDTO">
+		select * from GAME_FILES where GF_NUM=#{gfNum}
+	</select>
+	
+	<insert id="updateSlideFile" parameterType="GameFilesDTO">
+		INSERT INTO
+		GAME_FILES(GF_NUM, GF_FILENAME, GF_SAVEDFILENAME,
+		G_NUM,GF_CODE)
+		VALUES
+		(GF_SEQ.nextval, #{gfFilename},
+		#{gfSavedfilename},(select G_NUM from
+		GAMES WHERE
+		G_NAME=#{gName}),#{gfCode})
+	</insert>
+	
+	<insert id="updateMainFile" parameterType="GameFilesDTO">
+		INSERT INTO
+		GAME_FILES(GF_NUM, GF_FILENAME, GF_SAVEDFILENAME,
+		G_NUM,GF_CODE)
+		VALUES
+		(GF_SEQ.nextval, #{gfFilename},
+		#{gfSavedfilename},(select G_NUM from
+		GAMES WHERE
+		G_NAME=#{gName}),#{gfCode})
+	</insert>
 
 	<insert id="updateGenre" parameterType="GenreDTO">
 		INSERT INTO
@@ -36,7 +80,7 @@
 		VALUES(GENRE_GAMES_SEQ.nextval,#{gNum},#{genNum})
 	</insert>
 
-<insert id="upinsertSpec" parameterType="SpecDTO">
+	<insert id="upinsertSpec" parameterType="SpecDTO">
 		INSERT INTO
 		SPEC(
 		SPEC_NUM,
@@ -60,7 +104,8 @@
 
 	<select id="modifyGenreList" resultType="myGenreDTO">
 		select
-		G_NUM, GEN_NUM,(select
+		G_NUM,
+		GEN_NUM,(select
 		GEN_NAME from GENRES where GEN_NUM=GENRE_GAMES.GEN_NUM)
 		as GEN_NAME
 		from GENRE_GAMES where G_NUM= #{gNum}
